@@ -24,5 +24,44 @@
     "cinder_volume_service": "cinder-volume",
   }
   }, merge=salt["pillar.get"]("cinder:lookup")) %}
+
+{%- set cinder_config = {
+  "DEFAULT": {
+    "rootwrap_config": "/etc/cinder/rootwrap.conf",
+    "api_paste_confg": "/etc/cinder/api-paste.ini",
+    "iscsi_helper": "tgtadm",
+    "volume_name_template": "volume-%s",
+    "volume_group": "cinder-volumes",
+    "verbose": "False",
+    "auth_strategy": "keystone",
+    "state_path": "/var/lib/cinder",
+    "lock_path": "/var/lock/cinder",
+    "volumes_dir": "/var/lib/cinder/volumes",
+
+    "rpc_backend": "cinder.openstack.common.rpc.impl_kombu",
+    "rabbit_userid": salt["pillar.get"]("cinder:rabbitmq:name"),
+    "rabbit_password": salt["pillar.get"]("cinder:rabbitmq:password"),
+  },
+  "database": {
+    "connection": "mysql://cinder:" + salt["pillar.get"]("cinder:mysql:password") + "@" + salt["pillar.get"]("cinder:mysql:ip", "localhost") + "/cinder?charset=utf8"
+  },
+  "keystone_authtoken":{
+    "auth_host": salt["pillar.get"]("cinder:keystone:host", "localhost"),
+    "auth_port": 5000,
+    "auth_protocol": "http",
+    "admin_tenant_name": "service",
+    "admin_user" : "cinder",
+    "admin_password": salt["pillar.get"]("cinder:keystone:password")
+  }
+} 
+%}
+
+{% for section, value in salt["pillar.get"]("cinder:config").iteritems() %}
+  {% if not cinder_config.has_key(section) %}
+    {% do cinder_config.update({ section:{} }) %}
+  {% endif %}
+  {% do cinder_config[section].update(value) %}
+{% endfor %}
+
 {#- vim:ft=sls
 -#}

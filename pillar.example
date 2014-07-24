@@ -14,7 +14,9 @@ cinder:
     name: openstack
     password: pass
     ip: 10.0.0.12
-  conf: {}
+  config:
+    DEFAULT:
+      debug: False
 
 
 {#- vim:ft=sls
