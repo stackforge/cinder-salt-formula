@@ -1,8 +1,8 @@
 {% set cinder=salt["grains.filter_by"]({
   "Debian":{
     "name": "cinder",
-    "server_pkgs": ["cinder-api", "cinder-scheduler", "cinder-backup"],
-    "server_services": ["cinder-api", "cinder-scheduler", "cinder-backup"],
+    "server_pkgs": ["cinder-api", "cinder-scheduler", "cinder-backup", "python-cinderclient"],
+    "server_services": ["cinder-api", "cinder-scheduler"],
     "client_pkg": "python-cinderclient",
     "cinder_volume": "cinder-volume",
     "cinder_volume_service": "cinder-volume",
@@ -10,7 +10,7 @@
   "RedHat":{
     "name": "cinder",
     "server_pkgs": ["openstack-cinder"],
-    "server_services": ["openstack-cinder-api", "openstack-cinder-scheduler", "openstack-cinder-backup"],
+    "server_services": ["openstack-cinder-api", "openstack-cinder-scheduler"],
     "client_pkg": "python-cinderclient",
     "cinder_volume": "openstack-cinder",
     "cinder_volume_service": "openstack-cinder-volume",

@@ -17,3 +17,9 @@ include:
       - file: /etc/cinder/cinder.conf
     - watch:
       - file: /etc/cinder/cinder.conf
+
+{{ cinder.name }}_sync_db:
+  cmd.run:
+    - name: cinder-manage db sync
+    - require:
+      - file: /etc/cinder/cinder.conf
