@@ -9,6 +9,8 @@ include:
   pkg.installed:
     - refresh: False
     - pkgs: {{ cinder.server_pkgs }}
+    - require_in:
+      - file: /etc/cinder/cinder.conf
   service.running:
     - names: {{ cinder.server_services }}
     - enable: True
