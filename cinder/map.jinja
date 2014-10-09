@@ -52,7 +52,9 @@
     "rabbit_password": salt["pillar.get"]("cinder:rabbitmq:password"),
   },
   "database": {
-    "connection": "mysql://cinder:" + salt["pillar.get"]("cinder:mysql:password") + "@" + salt["pillar.get"]("cinder:mysql:ip", "localhost") + "/cinder?charset=utf8"
+    "connection": ("mysql://cinder:" + salt["pillar.get"]("cinder:mysql:password") + "@"
+                    + salt["pillar.get"]("cinder:mysql:ip", "localhost")
+                    + "/cinder?charset=utf8")
   },
   "keystone_authtoken":{
     "auth_host": salt["pillar.get"]("cinder:keystone:host", "localhost"),
