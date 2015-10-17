@@ -1,45 +1,7 @@
-==============
-Cinder Formula
-==============
+This project is no longer maintained.
 
-Install and configure the OpenStack Cinder service.
+The contents of this repository are still available in the Git source code
+management system. To see the contents of this repository before it reached
+its end of life, please check out the previous commit with 
+"git checkout HEAD^1".
 
-.. note::
-    See the full `Salt Formulas installation and usage instructions
-    <http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html>`_.
-
-Available states
-================
-
-.. contents::
-    :local:
-
-``cinder``
-----------
-
-Install the Cinder and enable the service.
-
-``cinder.db``
--------------
-
-Create the db for Cinder service.
-
-``cinder.keystone``
--------------------
-
-Init the Cinder user, service and endpoint.
-
-``cinder.server``
------------------
-
-Install the Cinder and enable the service.
-
-``cinder.client``
------------------
-
-Install the python-cinderclient package.
-
-``cinder.volume``
------------------
-
-Install the Cinder Volume Service
